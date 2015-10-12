@@ -16,7 +16,7 @@ CREATE TABLE Autor(
 
 CREATE TABLE Libro(
 	idLibro INT IDENTITY(1,1) NOT NULL,
-	ISBN INT NOT NULL,
+	  INT NOT NULL,
 	Nombre VARCHAR(255) NOT NULL, 
 	idAutor INT NOT NULL,
 	Editorial VARCHAR(255) NOT NULL,
@@ -206,34 +206,34 @@ INSERT INTO Alumno(idUsuario, Nombre, Apellido, Carnet)
 
  --------------------------------------------------------
 
- INSERT INTO Biblotecario(Nombre, Apellido, Contraseña)
+ INSERT INTO Biblotecario(Nombre, Apellido, Contrasena)
 	VALUES('Mario', 'Santiago', 123);
 
- INSERT INTO Biblotecario(Nombre, Apellido, Contraseña)
+ INSERT INTO Biblotecario(Nombre, Apellido, Contrasena)
 	VALUES('Pedro', 'Rodriguez', 234);
 
- INSERT INTO Biblotecario(Nombre, Apellido, Contraseña)
+ INSERT INTO Biblotecario(Nombre, Apellido, Contrasena)
 	VALUES('Gustavo', 'Cepeda', 345);
 
- INSERT INTO Biblotecario(Nombre, Apellido, Contraseña)
+ INSERT INTO Biblotecario(Nombre, Apellido, Contrasena)
 	VALUES('Enrique', 'Padilla', 456);
 
- INSERT INTO Biblotecario(Nombre, Apellido, Contraseña)
+ INSERT INTO Biblotecario(Nombre, Apellido, Contrasena)
 	VALUES('Rodrigo', 'Sipaque', 567);   
 	
- INSERT INTO Biblotecario(Nombre, Apellido, Contraseña)
+ INSERT INTO Biblotecario(Nombre, Apellido, Contrasena)
 	VALUES('Wilmer', 'Omar', 678);
 	
- INSERT INTO Biblotecario(Nombre, Apellido, Contraseña)
+ INSERT INTO Biblotecario(Nombre, Apellido, Contrasena)
 	VALUES('Crisitna', 'Aguilar', 789);
 	
- INSERT INTO Biblotecario(Nombre, Apellido, Contraseña)
+ INSERT INTO Biblotecario(Nombre, Apellido, Contrasena)
 	VALUES('Marvin', 'Matias', 890);
 	
- INSERT INTO Biblotecario(Nombre, Apellido, Contraseña)
+ INSERT INTO Biblotecario(Nombre, Apellido, Contrasena)
 	VALUES('Manuel', 'Herrera', 978);	
 
- INSERT INTO Biblotecario(Nombre, Apellido, Contraseña)
+ INSERT INTO Biblotecario(Nombre, Apellido, Contrasena)
 	VALUES('Gerber', 'Alvarado', 876);					
 
  SELECT * FROM Biblotecario;

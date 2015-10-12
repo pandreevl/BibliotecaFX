@@ -20,10 +20,13 @@ import javafx.stage.Stage;
 import bibliotecafx.helpers.DBHelper;
 import bibliotecafx.models.Biblotecario;
 import bibliotecafx.helpers.Dialogs;
+import bibliotecafx.models.Book;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 
@@ -36,6 +39,17 @@ public class MainApp extends Application {
     private Biblotecario biblotecarioAutenticado;
     private Stage primaryStage;
     private BorderPane rootLayout;
+    private ObservableList<Book> bookList = FXCollections.observableArrayList();
+
+    public MainApp() throws SQLException {
+        this.bookList = Book.getBookList();
+    }
+
+    public ObservableList<Book> getBookList() {
+        return bookList;
+    }
+
+    
 
     @Override
     public void start(Stage primaryStage) {
