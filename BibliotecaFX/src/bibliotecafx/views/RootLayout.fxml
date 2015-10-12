@@ -5,30 +5,232 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bibliotecafx.controllers.RootLayoutController">
-   <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-                  <MenuItem mnemonicParsing="false" onAction="#cargarDatosXML" text="Open" />
-                  <MenuItem mnemonicParsing="false" onAction="#guardarDatosXML" text="Save as..." />
-              <MenuItem mnemonicParsing="false" onAction="#salirDeAplicacion" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="View">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#mostrarAlumnosCRUD" text="Alumnos" />
-                  <MenuItem mnemonicParsing="false" onAction="#mostrarInstructoresCRUD" text="Instructores" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-   </top>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="859.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="bibliotecafx.controllers.RootLayoutController">
+  <center>
+    <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+      <tabs>
+        <Tab text="Author">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <TableView layoutX="61.0" layoutY="42.0" prefHeight="372.0" prefWidth="225.0">
+                  <columns>
+                    <TableColumn prefWidth="75.0" text="Name" />
+                    <TableColumn prefWidth="75.0" text="Last Name" />
+                    <TableColumn prefWidth="75.0" text="Nationality" />
+                  </columns>
+                </TableView>
+                <GridPane layoutX="322.0" layoutY="174.0" prefHeight="111.0" prefWidth="310.0">
+                  <children>
+                    <Label text="Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <Label text="Last Name" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <Label text="Nationality" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <TextField id="txtApellido" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <TextField id="txtApellido" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <TextField id="txtNombre" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="181.0" minWidth="10.0" prefWidth="157.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="153.0" minWidth="10.0" prefWidth="153.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <Label layoutX="322.0" layoutY="109.0" prefWidth="279.0" text="                          Author" textAlignment="CENTER">
+                  <font>
+                    <Font name="System Bold" size="16.0" fx:id="x1" />
+                  </font>
+                </Label>
+                <Button layoutX="354.0" layoutY="367.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="83.0" text="Added" />
+                <Button layoutX="466.0" layoutY="367.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="83.0" text="Modify" />
+                <Button layoutX="565.0" layoutY="367.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="83.0" text="Delete" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Books">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="455.0" prefWidth="873.0">
+              <children>
+                <TableView layoutX="20.0" layoutY="12.0" prefHeight="372.0" prefWidth="451.0">
+                  <columns>
+                    <TableColumn prefWidth="75.0" text="ISBN" />
+                    <TableColumn prefWidth="75.0" text="Name" />
+                    <TableColumn prefWidth="75.0" text="Author" />
+                    <TableColumn prefWidth="75.0" text="Type" />
+                    <TableColumn prefWidth="75.0" text="Editorial" />
+                    <TableColumn prefWidth="75.0" text="Price" />
+                  </columns>
+                </TableView>
+                <GridPane layoutX="492.0" layoutY="108.0" prefWidth="340.0">
+                  <children>
+                    <Label text="ISBN" />
+                    <Label text="Name" GridPane.rowIndex="1" />
+                    <Label text="Author" GridPane.rowIndex="2" />
+                    <Label text="Type" GridPane.rowIndex="3" />
+                    <TextField fx:id="txtCarne" GridPane.columnIndex="1" />
+                    <Label text="Editorial" GridPane.rowIndex="4" />
+                    <Label text="Book" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                    <TextField id="txtApellido" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <TextField id="txtDireccion" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <TextField id="txtTelefono" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    <TextField id="txtTelefono" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                    <TextField id="txtNombre" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <TextField id="txtApellido" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <Button layoutX="536.0" layoutY="411.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="83.0" text="Added" />
+                <Button layoutX="648.0" layoutY="411.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="83.0" text="Modify" />
+                <Button layoutX="747.0" layoutY="411.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="83.0" text="Delete" />
+                <Label font="$x1" layoutX="550.0" layoutY="55.0" prefWidth="235.0" text="                    BOOKS" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Borrowing">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <TableView layoutX="99.0" layoutY="42.0" prefHeight="372.0" prefWidth="298.0">
+                  <columns>
+                    <TableColumn prefWidth="75.0" text="Name " />
+                    <TableColumn prefWidth="75.0" text="Book" />
+                    <TableColumn prefWidth="75.0" text="Borrowing" />
+                    <TableColumn prefWidth="75.0" text="Delivery" />
+                  </columns>
+                </TableView>
+                <GridPane layoutX="444.0" layoutY="138.0" prefHeight="120.0" prefWidth="298.0">
+                  <children>
+                    <Label text="Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <Label text="Book" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <Label text="Borrowing" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <Label text="Delivery " GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <Button layoutX="467.0" layoutY="351.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="83.0" text="Added" />
+                <Button layoutX="579.0" layoutY="351.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="83.0" text="Modify" />
+                <Button layoutX="678.0" layoutY="351.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="83.0" text="Delete" />
+                <Label font="$x1" layoutX="526.0" layoutY="70.0" prefWidth="206.0" text="             Borrowing" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Editorial">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <TableView layoutX="155.0" layoutY="42.0" prefHeight="372.0" prefWidth="218.0">
+                  <columns>
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="217.0" text="Name" />
+                  </columns>
+                </TableView>
+                <GridPane layoutX="427.0" layoutY="206.0" prefHeight="45.0" prefWidth="271.0">
+                  <children>
+                    <Label text="Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <Button layoutX="410.0" layoutY="338.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="83.0" text="Added" />
+                <Button layoutX="522.0" layoutY="338.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="83.0" text="Modify" />
+                <Button layoutX="621.0" layoutY="338.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="83.0" text="Delete" />
+                <Label font="$x1" layoutX="425.0" layoutY="83.0" prefHeight="30.0" prefWidth="238.0" text="                  Editorial" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Type">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <TableView layoutX="152.0" layoutY="42.0" prefHeight="372.0" prefWidth="218.0">
+                  <columns>
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="217.0" text="Name" />
+                  </columns>
+                </TableView>
+                <GridPane layoutX="425.0" layoutY="185.0" prefHeight="45.0" prefWidth="271.0">
+                  <children>
+                    <Label text="Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <Button layoutX="413.0" layoutY="340.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="83.0" text="Added" />
+                <Button layoutX="525.0" layoutY="340.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="83.0" text="Modify" />
+                <Button layoutX="624.0" layoutY="340.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="83.0" text="Delete" />
+                <Label font="$x1" layoutX="425.0" layoutY="99.0" prefWidth="268.0" text="                          Type" textAlignment="LEFT" textOverrun="ELLIPSIS" underline="false" wrapText="true" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </center>
+  <top>
+    <MenuBar BorderPane.alignment="CENTER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Open" />
+            <MenuItem mnemonicParsing="false" text="Save as..." />
+            <MenuItem mnemonicParsing="false" text="Close" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="View">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Alumnos" />
+            <MenuItem mnemonicParsing="false" text="Instructores" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+  </top>
 </BorderPane>

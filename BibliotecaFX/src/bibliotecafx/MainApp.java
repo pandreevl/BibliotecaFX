@@ -5,6 +5,7 @@
  */
 package bibliotecafx;
 
+import bibliotecafx.controllers.RootLayoutController;
 import java.sql.SQLException;
 import java.util.Optional;
 import javafx.application.Application;
@@ -19,9 +20,12 @@ import javafx.stage.Stage;
 import bibliotecafx.helpers.DBHelper;
 import bibliotecafx.models.Biblotecario;
 import bibliotecafx.helpers.Dialogs;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.BorderPane;
 
 /**
  *
@@ -30,14 +34,14 @@ import java.sql.ResultSet;
 public class MainApp extends Application {
 
     private Biblotecario biblotecarioAutenticado;
+    private Stage primaryStage;
+    private BorderPane rootLayout;
 
     @Override
     public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
         mostrarLogin();
-        StackPane root = new StackPane();
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        mostrarRoot(primaryStage);
 
     }
 
@@ -72,6 +76,27 @@ public class MainApp extends Application {
             }
         } while (loginExitoso == false);
     }
+    
+    
+    public void mostrarRoot(Stage primaryStage){
+        this.primaryStage = primaryStage;
+//        this.primaryStage.getIcons().add(new Image("cine/resources/images/icon.png"));
+        this.primaryStage.setTitle("Sistema de Biblioteca");
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("views/RootLayout.fxml"));
+            rootLayout = (BorderPane) loader.load();
+            RootLayoutController controller = loader.getController();
+            controller.setMainApp(this);
+            Scene scene = new Scene(rootLayout);
+            //primaryStage.setResizable(false);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            Alert error = Dialogs.getErrorDialog(Alert.AlertType.ERROR, "Biblioteca", null, "Error al cargar el archivo FXML", e);
+            error.showAndWait();
+        }
+    }
 
     public Biblotecario getBiblotecarioAutenticado() {
         return biblotecarioAutenticado;
@@ -79,7 +104,7 @@ public class MainApp extends Application {
 
     public boolean getBiblotecarioLogin(String userName, String password) {
         String sql = "SELECT * FROM Biblotecario"
-                + " WHERE nombre = '" + userName + "'";
+                + " WHERE nombre = '" + userName + "' AND contrasena = '" + password + "'";
         try {
             Connection con = DBHelper.getConnection();
             PreparedStatement queryStatement = con.prepareStatement(sql);
