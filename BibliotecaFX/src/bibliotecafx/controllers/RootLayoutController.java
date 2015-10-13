@@ -72,16 +72,15 @@ public class RootLayoutController {
         tbvBooks.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         tbvBooks.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Book>() {
 
-
             @Override
             public void changed(ObservableValue<? extends Book> observable, Book oldValue, Book newValue) {
                 ShowBookDetails(newValue);
             }
         });
     }
-    
-    public void ShowBookDetails(Book book){
-        if (book == null){
+
+    public void ShowBookDetails(Book book) {
+        if (book == null) {
             txtName.setText("");
             txtAuthor.setText("");
             txtEditorial.setText("");
@@ -97,7 +96,7 @@ public class RootLayoutController {
             txtPrice.setText("" + book.getPrecio() + "");
         }
     }
-    
+
     private void refreshBookList() {
         int selectedIndex = tbvBooks.getSelectionModel().getSelectedIndex();
         tbvBooks.setItems(null);
@@ -105,15 +104,27 @@ public class RootLayoutController {
         tbvBooks.setItems(mainApp.getBookList());
         tbvBooks.getSelectionModel().select(selectedIndex);
     }
-    
+
     @FXML
-    public void addToDB(){
-        
+    public void addToDB() {
+        Book Temp = new Book();
+        Temp.setEditorial(txtEditorial.getText());
+        Temp.setGenero(txtType.getText());
+        Temp.setISBN(Integer.parseInt(txtISBN.getText()));
+        Temp.setIdAutor(Integer.parseInt(txtAuthor.getText()));
+        Temp.setNombre(txtName.getText());
+        Temp.setPrecio(Integer.parseInt(txtPrice.getText()));
+        boolean okPresionado = Book.inputBook(Temp);
+        if (okPresionado) {
+            mainApp.getBookList().add(Temp);
+            Alert mensaje = Dialogs.getDialog(Alert.AlertType.INFORMATION, "Biblioteca", null, "Se ha ingresado el libro correctamente");
+                    mensaje.showAndWait();
+        }
     }
-    
+
     @FXML
-    public void deleteToDB(){
-      int selectedIndex = tbvBooks.getSelectionModel().getSelectedIndex();
+    public void deleteToDB() {
+        int selectedIndex = tbvBooks.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             Book bookToDelete = tbvBooks.getSelectionModel().getSelectedItem();
             Alert question = Dialogs.getDialog(Alert.AlertType.CONFIRMATION, "Biblioteca", null, "Deseas eliminar este libro");
@@ -122,18 +133,40 @@ public class RootLayoutController {
                 boolean okClicked = Book.deleteBook(bookToDelete);
                 if (okClicked) {
                     tbvBooks.getItems().remove(selectedIndex);
+                    Alert mensaje = Dialogs.getDialog(Alert.AlertType.INFORMATION, "Biblioteca", null, "Se ha eliminado el libro correctamente");
+                    mensaje.showAndWait();
                 }
             }
         } else {
             Alert error = Dialogs.getDialog(Alert.AlertType.ERROR, "Biblioteca", null, "No ha seleccionado ningun libro");
             error.showAndWait();
-        }  
+        }
     }
-    
+
     @FXML
-    public void updateToDB(){
-        
+    public void updateToDB() {
+        Book selectedBook = tbvBooks.getSelectionModel().getSelectedItem();
+        if (selectedBook != null) {
+
+            selectedBook.setEditorial(txtEditorial.getText());
+            selectedBook.setGenero(txtType.getText());
+            selectedBook.setISBN(Integer.parseInt(txtISBN.getText()));
+            selectedBook.setIdAutor(Integer.parseInt(txtAuthor.getText()));
+            selectedBook.setNombre(txtName.getText());
+            selectedBook.setPrecio(Integer.parseInt(txtPrice.getText()));
+
+            boolean okClicked = Book.updateBook(selectedBook);
+            if (okClicked) {
+                refreshBookList();
+                ShowBookDetails(selectedBook);
+                Alert mensaje = Dialogs.getDialog(Alert.AlertType.INFORMATION, "Biblioteca", null, "Se ha modificado el libro correctamente");
+                mensaje.showAndWait();
+            }
+
+        } else {
+            Alert error = Dialogs.getDialog(Alert.AlertType.ERROR, "Biblioteca", null, "No ha seleccionado ningun Libro");
+            error.showAndWait();
+        }
     }
-            
-            
+
 }

@@ -22,8 +22,8 @@ import javafx.scene.control.Alert;
  * @author Pablo
  */
 public class Book {
-    
-    private int  idLibro;
+
+    private int idLibro;
     private int ISBN;
     private int idAutor;
     private int Precio;
@@ -40,9 +40,11 @@ public class Book {
         this.Editorial = Editorial;
         this.Genero = Genero;
     }
-    public Book(){
-        
+
+    public Book() {
+
     }
+
     public static ObservableList<Book> getBookList() throws SQLException {
         ObservableList<Book> books = FXCollections.observableArrayList();
 
@@ -53,7 +55,7 @@ public class Book {
             ResultSet rs = con.createStatement().executeQuery(sql);
             while (rs.next()) {
                 Book book = new Book();
-                
+
                 book.setIdLibro(rs.getInt("idLibro"));
                 book.setNombre(rs.getString("nombre"));
                 book.setISBN(rs.getInt("ISBN"));
@@ -70,7 +72,7 @@ public class Book {
 
         return books;
     }
-    
+
     public int getIdLibro() {
         return idLibro;
     }
@@ -127,24 +129,75 @@ public class Book {
         this.Genero = Genero;
     }
     
-    public static boolean deleteBook(Book book){
-        String deleteSQL = "DELETE FROM Libro "
-                + "WHERE idLibro = ?";
+    public static boolean inputBook(Book newBook){
+        
+        String insertSQL =  "INSERT INTO Libro (ISBN, Nombre, idAutor, Editorial, Genero, Precio)"
+                + "VALUES (?, ?, ?, ?, ?, ?) ";
         try{
-            PreparedStatement deleteStatement = DBHelper.getConnection().prepareStatement(deleteSQL);
-            deleteStatement.setString(1, Integer.toString(book.getIdLibro()));
+            PreparedStatement insertStatement = DBHelper.getConnection().prepareStatement(insertSQL);
             
-            deleteStatement.executeUpdate();
-            //DBHelper.getConnection().commit();
+            insertStatement.setString(1, Integer.toString(newBook.getISBN()));
+            insertStatement.setString(2, (newBook.getNombre()));
+            insertStatement.setString(3, Integer.toString(newBook.getIdAutor()));
+            insertStatement.setString(4, newBook.getEditorial());
+            insertStatement.setString(5, newBook.getGenero());
+            insertStatement.setString(6, Integer.toString(newBook.getPrecio()));
+            
+            insertStatement.executeUpdate();
+            DBHelper.getConnection().commit();
             
         }catch( SQLException | ClassNotFoundException ex){
+            Alert error = Dialogs.getErrorDialog(Alert.AlertType.ERROR, "Cine", "Error al insertar una pelicula", ex.toString(), ex);
+            error.showAndWait();
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean deleteBook(Book book) {
+        String deleteSQL = "DELETE FROM Libro "
+                + "WHERE idLibro = ?";
+        try {
+            PreparedStatement deleteStatement = DBHelper.getConnection().prepareStatement(deleteSQL);
+            deleteStatement.setString(1, Integer.toString(book.getIdLibro()));
+
+            deleteStatement.executeUpdate();
+            //DBHelper.getConnection().commit();
+
+        } catch (SQLException | ClassNotFoundException ex) {
             Alert error = Dialogs.getErrorDialog(Alert.AlertType.ERROR, "Biblioteca", "Error al eliminar el libro", ex.getMessage(), ex);
             error.showAndWait();
             return false;
         }
         return true;
     }
-    
-    
-           
+
+    public static boolean updateBook(Book newBook) {
+        String updateSQL = "UPDATE Libro"
+                + " SET ISBN = ? , Nombre = ?, Editorial = ?, Genero = ?, idAutor = ?, precio = ? "
+                + "WHERE idLibro = ?";
+
+        try {
+            PreparedStatement updateStatement = DBHelper.getConnection().prepareStatement(updateSQL);
+            updateStatement.setString(1, Integer.toString(newBook.getISBN()));
+            updateStatement.setString(2, (newBook.getNombre()));
+            updateStatement.setString(3, newBook.getEditorial());
+            updateStatement.setString(4, newBook.getGenero());
+            updateStatement.setString(5, Integer.toString(newBook.getIdAutor()));
+            updateStatement.setString(6, Integer.toString(newBook.getPrecio()));
+            updateStatement.setString(7, Integer.toString(newBook.getIdLibro()));
+            
+            updateStatement.executeUpdate();
+            DBHelper.getConnection().commit();
+
+        } catch (SQLException | ClassNotFoundException ex) {
+
+            Alert error = Dialogs.getErrorDialog(Alert.AlertType.ERROR, "Biblioteca", "Error al actualizar el Libro", ex.getMessage(), ex);
+            error.showAndWait();
+            return false;
+        }
+
+        return true;
+    }
+
 }
