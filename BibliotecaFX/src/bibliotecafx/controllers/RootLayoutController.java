@@ -108,7 +108,7 @@ public class RootLayoutController {
     }
     
     @FXML
-    public void deletetoDB(){
+    public void deleteToDB(){
         
     }
     

@@ -98,7 +98,7 @@
                 </GridPane>
                 <Button layoutX="536.0" layoutY="411.0" mnemonicParsing="false" onAction="#addToDB" prefHeight="30.0" prefWidth="83.0" text="Added" />
                 <Button layoutX="648.0" layoutY="411.0" mnemonicParsing="false" onAction="#updateToDB" prefHeight="30.0" prefWidth="83.0" text="Modify" />
-                <Button layoutX="747.0" layoutY="411.0" mnemonicParsing="false" onAction="#deleteToDb" prefHeight="30.0" prefWidth="83.0" text="Delete" />
+                <Button layoutX="747.0" layoutY="411.0" mnemonicParsing="false" onAction="#deleteToDB" prefHeight="30.0" prefWidth="83.0" text="Delete" />
                 <Label font="$x1" layoutX="550.0" layoutY="55.0" prefWidth="235.0" text="                    BOOKS" />
               </children>
             </AnchorPane>
