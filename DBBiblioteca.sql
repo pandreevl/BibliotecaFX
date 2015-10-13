@@ -48,7 +48,7 @@ CREATE TABLE Biblotecario(
 	idBiblotecario INT IDENTITY (1,1),
 	Nombre VARCHAR (255),
 	Apellido VARCHAR (255),
-	Contraseña CHAR (30),
+	Contraseña VARCHAR (30),
 	PRIMARY KEY(idBiblotecario)
 );
 
