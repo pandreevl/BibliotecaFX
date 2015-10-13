@@ -9,9 +9,12 @@ import bibliotecafx.MainApp;
 import bibliotecafx.models.Book;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
@@ -19,26 +22,75 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * @author Usuario
  */
 public class RootLayoutController {
+
     private MainApp mainApp;
     @FXML
     public TableView<Book> tbvBooks;
     @FXML
-    public TableColumn<Book, String> tbcISBN;
+    public TableColumn<Book, Integer> tbcISBN;
     @FXML
     public TableColumn<Book, String> tbcName;
-   
-    public void setMainApp(MainApp mainApp){
+    @FXML
+    public TableColumn<Book, Integer> tbcAuthor;
+    @FXML
+    public TableColumn<Book, String> tbcType;
+    @FXML
+    public TableColumn<Book, Integer> tbcPrice;
+    @FXML
+    public TableColumn<Book, String> tbcEditorial;
+    @FXML
+    public TextField txtName;
+    @FXML
+    public TextField txtISBN;
+    @FXML
+    public TextField txtAuthor;
+    @FXML
+    public TextField txtType;
+    @FXML
+    public TextField txtPrice;
+    @FXML
+    public TextField txtEditorial;
+
+    public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-        tbvBooks.setItems(mainApp.getBookList());
+        cargarListaLibros();
     }
-    
-    public void initialize(URL url, ResourceBundle rb) {
-        tbcISBN.setCellValueFactory(new PropertyValueFactory<Book, String>("ISBN"));
-        tbcName.setCellValueFactory(new PropertyValueFactory<Book, String>("Name"));
+
+    public void cargarListaLibros() {
+        tbvBooks.setItems(mainApp.getBookList());
+        tbcISBN.setCellValueFactory(new PropertyValueFactory<Book, Integer>("ISBN"));
+        tbcName.setCellValueFactory(new PropertyValueFactory<Book, String>("Nombre"));
+        tbcAuthor.setCellValueFactory(new PropertyValueFactory<Book, Integer>("idAutor"));
+        tbcEditorial.setCellValueFactory(new PropertyValueFactory<Book, String>("Editorial"));
+        tbcType.setCellValueFactory(new PropertyValueFactory<Book, String>("Genero"));
+        tbcPrice.setCellValueFactory(new PropertyValueFactory<Book, Integer>("Precio"));
 
         tbvBooks.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        
-        
+        tbvBooks.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Book>() {
+
+
+            @Override
+            public void changed(ObservableValue<? extends Book> observable, Book oldValue, Book newValue) {
+                ShowBookDetails(newValue);
+            }
+        });
     }
-            
+    
+    public void ShowBookDetails(Book book){
+        if (book == null){
+            txtName.setText("");
+            txtAuthor.setText("");
+            txtEditorial.setText("");
+            txtISBN.setText("");
+            txtType.setText("");
+            txtPrice.setText("");
+        } else {
+            txtName.setText(book.getNombre());
+            txtAuthor.setText("" + book.getIdAutor() + "");
+            txtEditorial.setText(book.getEditorial());
+            txtISBN.setText("" + book.getISBN() + "");
+            txtType.setText(book.getGenero());
+            txtPrice.setText("" + book.getPrecio() + "");
+        }
+    }
 }

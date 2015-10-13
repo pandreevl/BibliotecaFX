@@ -43,6 +43,9 @@ public class MainApp extends Application {
 
     public MainApp() throws SQLException {
         this.bookList = Book.getBookList();
+        for (Book x: bookList){
+            System.out.println(x.getNombre());
+        }
     }
 
     public ObservableList<Book> getBookList() {

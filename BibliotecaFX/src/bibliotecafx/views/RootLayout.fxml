@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="859.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="bibliotecafx.controllers.RootLayoutController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="859.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bibliotecafx.controllers.RootLayoutController">
   <center>
     <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
       <tabs>
@@ -59,12 +59,12 @@
               <children>
                 <TableView fx:id="tbvBooks" layoutX="20.0" layoutY="12.0" prefHeight="372.0" prefWidth="451.0">
                   <columns>
-                    <TableColumn prefWidth="75.0" text="ISBN" fx:id="tbcISBN" />
-                    <TableColumn prefWidth="75.0" text="Name" fx:id="tbcName" />
-                    <TableColumn prefWidth="75.0" text="Author" fx:id="tbcAuthor" />
-                    <TableColumn prefWidth="75.0" text="Type" fx:id="tbcType" />
-                    <TableColumn prefWidth="75.0" text="Editorial" fx:id="tbcEditorial" />
-                    <TableColumn prefWidth="75.0" text="Price" fx:id="tbcPrice" />
+                    <TableColumn fx:id="tbcISBN" prefWidth="75.0" text="ISBN" />
+                    <TableColumn fx:id="tbcName" prefWidth="75.0" text="Name" />
+                    <TableColumn fx:id="tbcAuthor" prefWidth="75.0" text="Author" />
+                    <TableColumn fx:id="tbcType" prefWidth="75.0" text="Gender" />
+                    <TableColumn fx:id="tbcEditorial" prefWidth="75.0" text="Editorial" />
+                    <TableColumn fx:id="tbcPrice" prefWidth="75.0" text="Price" />
                   </columns>
                 </TableView>
                 <GridPane layoutX="492.0" layoutY="108.0" prefWidth="340.0">
@@ -72,16 +72,16 @@
                     <Label text="ISBN" />
                     <Label text="Name" GridPane.rowIndex="1" />
                     <Label text="Author" GridPane.rowIndex="2" />
-                    <Label text="Type" GridPane.rowIndex="3" />
+                    <Label text="Gender" GridPane.rowIndex="3" />
                     <TextField fx:id="txtCarne" GridPane.columnIndex="1" />
                     <Label text="Editorial" GridPane.rowIndex="4" />
-                    <Label text="Book" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                    <TextField id="txtApellido" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                    <TextField id="txtDireccion" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                    <TextField id="txtTelefono" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                    <TextField id="txtTelefono" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                    <TextField id="txtNombre" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                    <TextField id="txtApellido" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Label text="Precio" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                    <TextField id="txtApellido" fx:id="txtAuthor" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <TextField id="txtDireccion" fx:id="txtType" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <TextField id="txtTelefono" fx:id="txtEditorial" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    <TextField id="txtTelefono" fx:id="txtPrice" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                    <TextField id="txtNombre" fx:id="txtISBN" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <TextField id="txtApellido" fx:id="txtName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   </children>
                   <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -96,9 +96,9 @@
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
-                <Button layoutX="536.0" layoutY="411.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="83.0" text="Added" />
-                <Button layoutX="648.0" layoutY="411.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="83.0" text="Modify" />
-                <Button layoutX="747.0" layoutY="411.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="83.0" text="Delete" />
+                <Button layoutX="536.0" layoutY="411.0" mnemonicParsing="false" onAction="#addToDB" prefHeight="30.0" prefWidth="83.0" text="Added" />
+                <Button layoutX="648.0" layoutY="411.0" mnemonicParsing="false" onAction="#updateToDB" prefHeight="30.0" prefWidth="83.0" text="Modify" />
+                <Button layoutX="747.0" layoutY="411.0" mnemonicParsing="false" onAction="#deleteToDb" prefHeight="30.0" prefWidth="83.0" text="Delete" />
                 <Label font="$x1" layoutX="550.0" layoutY="55.0" prefWidth="235.0" text="                    BOOKS" />
               </children>
             </AnchorPane>
