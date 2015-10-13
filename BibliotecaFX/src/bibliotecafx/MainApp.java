@@ -28,25 +28,21 @@ import java.sql.ResultSet;
  * @author Pablo
  */
 public class MainApp extends Application {
-    
+
     private Biblotecario biblotecarioAutenticado;
-    
+
     @Override
     public void start(Stage primaryStage) {
-
-
+        mostrarLogin();
         StackPane root = new StackPane();
-        
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
-        mostrarLogin();
-        
+
     }
-    
+
     private void mostrarLogin() {
         boolean loginExitoso = false;
-
         do {
             Dialog login = Dialogs.getLoginDialog();
             Optional<Biblotecario> result = login.showAndWait();
@@ -80,7 +76,7 @@ public class MainApp extends Application {
     public Biblotecario getBiblotecarioAutenticado() {
         return biblotecarioAutenticado;
     }
-    
+
     public boolean getBiblotecarioLogin(String userName, String password) {
         String sql = "SELECT * FROM Biblotecario"
                 + " WHERE nombre = '" + userName + "'";
@@ -108,5 +104,5 @@ public class MainApp extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
