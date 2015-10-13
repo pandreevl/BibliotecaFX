@@ -16,14 +16,14 @@ CREATE TABLE Autor(
 
 CREATE TABLE Libro(
 	idLibro INT IDENTITY(1,1) NOT NULL,
-	  INT NOT NULL,
+	ISBN  INT NOT NULL,
 	Nombre VARCHAR(255) NOT NULL, 
 	idAutor INT NOT NULL,
 	Editorial VARCHAR(255) NOT NULL,
 	Genero VARCHAR(255) NOT NULL,
 	Precio INT NOT NULL,
 	PRIMARY KEY(idLibro),
-	FOREIGN KEY (idAutor) REFERENCES Autor(idAutor)
+	FOREIGN KEY (idAutor) REFERENCES Autor(idAutor) ON DELETE CASCADE
 );
 
 
@@ -41,14 +41,14 @@ CREATE TABLE Alumno(
 	Apellido VARCHAR(255) NOT NULL,
 	Carnet INT NOT NULL,	
 	PRIMARY KEY(idAlumno),
-	FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario)
+	FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario) ON DELETE CASCADE
 );
 
 CREATE TABLE Biblotecario(
 	idBiblotecario INT IDENTITY (1,1),
 	Nombre VARCHAR (255),
 	Apellido VARCHAR (255),
-	Contraseña VARCHAR (30),
+	Contrasena VARCHAR (30),
 	PRIMARY KEY(idBiblotecario)
 );
 
@@ -59,9 +59,9 @@ CREATE TABLE Prestamo(
 	idAlumno INT NOT NULL,
 	fechaPrestamo DATETIME NOT NULL,
 	fechaEntrega DATETIME NOT NULL,
-	FOREIGN KEY (idLibro ) REFERENCES Libro(idLibro),
-	FOREIGN KEY (idBiblotecario) REFERENCES Biblotecario(idBiblotecario),
-	FOREIGN KEY (idAlumno) REFERENCES Alumno(idAlumno),
+	FOREIGN KEY (idLibro ) REFERENCES Libro(idLibro) ON DELETE CASCADE,
+	FOREIGN KEY (idBiblotecario) REFERENCES Biblotecario(idBiblotecario) ON DELETE CASCADE,
+	FOREIGN KEY (idAlumno) REFERENCES Alumno(idAlumno) ON DELETE CASCADE,
 	PRIMARY KEY(idPrestamo)
 );
 

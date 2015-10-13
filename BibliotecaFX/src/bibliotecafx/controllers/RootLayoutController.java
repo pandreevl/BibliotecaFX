@@ -6,12 +6,16 @@
 package bibliotecafx.controllers;
 
 import bibliotecafx.MainApp;
+import bibliotecafx.helpers.Dialogs;
 import bibliotecafx.models.Book;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -109,7 +113,21 @@ public class RootLayoutController {
     
     @FXML
     public void deleteToDB(){
-        
+      int selectedIndex = tbvBooks.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            Book bookToDelete = tbvBooks.getSelectionModel().getSelectedItem();
+            Alert question = Dialogs.getDialog(Alert.AlertType.CONFIRMATION, "Biblioteca", null, "Deseas eliminar este libro");
+            Optional<ButtonType> result = question.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                boolean okClicked = Book.deleteBook(bookToDelete);
+                if (okClicked) {
+                    tbvBooks.getItems().remove(selectedIndex);
+                }
+            }
+        } else {
+            Alert error = Dialogs.getDialog(Alert.AlertType.ERROR, "Biblioteca", null, "No ha seleccionado ningun libro");
+            error.showAndWait();
+        }  
     }
     
     @FXML

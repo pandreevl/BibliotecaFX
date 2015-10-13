@@ -8,6 +8,7 @@ package bibliotecafx.models;
 import bibliotecafx.helpers.DBHelper;
 import bibliotecafx.helpers.Dialogs;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -126,7 +127,23 @@ public class Book {
         this.Genero = Genero;
     }
     
-    
+    public static boolean deleteBook(Book book){
+        String deleteSQL = "DELETE FROM Libro "
+                + "WHERE idLibro = ?";
+        try{
+            PreparedStatement deleteStatement = DBHelper.getConnection().prepareStatement(deleteSQL);
+            deleteStatement.setString(1, Integer.toString(book.getIdLibro()));
+            
+            deleteStatement.executeUpdate();
+            //DBHelper.getConnection().commit();
+            
+        }catch( SQLException | ClassNotFoundException ex){
+            Alert error = Dialogs.getErrorDialog(Alert.AlertType.ERROR, "Biblioteca", "Error al eliminar el libro", ex.getMessage(), ex);
+            error.showAndWait();
+            return false;
+        }
+        return true;
+    }
     
     
            
