@@ -93,4 +93,29 @@ public class RootLayoutController {
             txtPrice.setText("" + book.getPrecio() + "");
         }
     }
+    
+    private void refreshBookList() {
+        int selectedIndex = tbvBooks.getSelectionModel().getSelectedIndex();
+        tbvBooks.setItems(null);
+        tbvBooks.layout();
+        tbvBooks.setItems(mainApp.getBookList());
+        tbvBooks.getSelectionModel().select(selectedIndex);
+    }
+    
+    @FXML
+    public void addToDB(){
+        
+    }
+    
+    @FXML
+    public void deletetoDB(){
+        
+    }
+    
+    @FXML
+    public void updateToDB(){
+        
+    }
+            
+            
 }
